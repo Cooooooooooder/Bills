@@ -138,7 +138,7 @@
                                 <select name="status" id="status" class="form-control" required >
                                     <option value="" selected disabled>حدد القسم</option>
                                 <option value="مدفوع" class="text-success">مدفوع</option>
-                                <option value="مدفوع جزئا" class="text-warning">مدفوع جزئا</option>
+                                <option value="مدفوع جزئيا" class="text-warning">مدفوع جزئيا</option>
                                 </select>
                             </div>
 

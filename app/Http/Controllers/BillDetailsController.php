@@ -8,7 +8,7 @@ use App\Models\sections;
 use App\Models\Bill;
 
 
-class BillDetailsController extends Controller 
+class BillDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,16 +21,17 @@ class BillDetailsController extends Controller
 
     public function change_status(Request $request, Bill $bill)
     {
-
         $bill->status = $request->status;
         $bill->payment_date = $request->payment_date;
         $bill->save();
-        $bill_details = Bill_details::where('bill_id', $bill->id)->first();
-        $bill_details->status = $request->status;
-        $bill_details->payment_date = $request->payment_date;
-        $bill_details->save();
 
-        return redirect()->route('bills.index')->with('create.bill', 'تم اشاء الفاتورة بتجاح !');
+        $bill_details = Bill_details::where('bill_id', $bill->id)->first();
+        if ($bill_details) {
+            $bill_details->status = $request->status;
+            $bill_details->payment_date = $request->payment_date;
+            $bill_details->save();
+        }
+        return redirect()->route('bills.index')->with('create.bill', 'تم تغيير الحالة الفاتورة بتجاح !');
     }
 
     public function paied_bills()
@@ -41,7 +42,7 @@ class BillDetailsController extends Controller
 
     public function parted_paied_bills()
     {
-        $parted_paied_bills = Bill::where('status', 'مدفوع جزئا')->get();
+        $parted_paied_bills = Bill::where('status', 'مدفوع جزئيا')->get();
         return view('bills.parted_paied_bills', compact('parted_paied_bills'));
     }
 

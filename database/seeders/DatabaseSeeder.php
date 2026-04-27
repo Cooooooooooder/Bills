@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PermissionTableSeeder;
+use Database\Seeders\SectionsProductsBillsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,11 +19,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        $this->call(PermissionTableSeeder::class);
+        $this->call([SectionsProductsBillsSeeder::class]);
+        $this->call([PermissionTableSeeder::class]);
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-           
+
         ]);
     }
 }
